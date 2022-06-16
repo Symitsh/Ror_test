@@ -3,7 +3,15 @@
 <% @posts.each do |post| %>
 
   <h2><%= post.name %></h2>
-
   <p><%= post.content %></p>
+  <p>
+    <a href=" <%= post_path(post.id) %>" class="btn btn-primary">Lire la suite</a>
+    <a href=" <%= edit_post_path(post.id) %>" class="btn">Editer</a>
+    <a <%= link_to "Supprimer", post_path(post.id), data: {turbo_method: :delete, turbo_confirm: 'Êtes-vous sûrs?'}, class: "btn btn-danger" %></a>
+  </p>
 
 <% end %>
+
+<p>
+  <a href="<%= new_post_path %>" class="btn btn-success">Crée un article</a>
+</p>
