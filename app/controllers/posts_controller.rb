@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
+    cookies.delete(:username)
     @posts = Post.all
   end
 
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to @post, flash: {success: "Article modifié avec succès"}
     else
       render 'edit'
     end
@@ -26,12 +27,12 @@ class PostsController < ApplicationController
 
   def create
     post = Post.create(post_params)
-    redirect_to post_path(post.id)
+    redirect_to post_path(post.id), flash: {success: "Article créé avec succès"}
   end
 
   def destroy
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, flash: {success: "Article supprimé avec succès"}
   end
 
   private

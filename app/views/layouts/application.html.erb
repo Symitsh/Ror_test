@@ -39,7 +39,10 @@
       </div>
     </header>
     <div class="container" style="padding-top: 5rem;">
-
-    <%= yield %>
+      <% if flash[:success] %>
+        <div class="alert alert-success"><%= flash[:success] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
